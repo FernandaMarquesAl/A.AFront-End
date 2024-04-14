@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffee Shop Tia Rosa</title>
+    <style>
+        * {box-sizing: border-box}
+body {font-family: Verdana, sans-serif; margin:0}
+.mySlides {display: none}
+img {vertical-align: middle;}
+
+/* Slideshow container 
+.slideshow-container {
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
+}*/
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .prev, .next,.text {font-size: 11px}
+}
+    /* Estilos gerais */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+nav {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav img {
+    height: 50px;
+}
+
+nav ul {
+    list-style-type: none;
+    display: flex;
+    gap: 20px;
+}
+
+nav ul li {
+    margin: 0;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+/* Carousel */
+#carousel {
+    .carousel {
+    width: 100%;
+    overflow: hidden;
+}
+
+.carousel-inner {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.slide {
+    width: 100%;
+    height: auto;
+}
+}
+
+/* Seções */
+section {
+    padding: 20px;
+}
+
+section h2 {
+    color: #333;
+}
+
+/* Menu */
+section#menu ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+section#menu ul li {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+section#menu ul li h3 {
+    color: #333;
+}
+
+section#menu ul li img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+section#menu ul li p {
+    color: #666;
+}
+
+section#menu ul li button {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Carrinho */
+section#carrinho button {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Rodapé */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+    </style>
+</head>
+<body>
+    <!-- Barra de navegação -->
+    <nav>
+        <img src="data:image/png;base64,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" alt="Coffee Shop Tia Rosa">
+        <ul>
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#carrinho">Carrinho</a></li>
+            <li><a href="#adress">Endereço</a></li>
+            <li><a href="#reviwe">Avaliações</a></li>
+        </ul>
+    </nav>
+    <div class="icons">
+        <img width="50" height="50" src="https://img.icons8.com/ios/50/000000/search--v1.png" alt="search--v1"/>
+        <img width="50" height="50" src="https://img.icons8.com/ios/50/000000/shopping-cart--v1.png" alt="shopping-cart--v1"/>
+    </div>
+    <!-- Carousel de imagens -->
+    <div class="carousel">
+        <div class="carousel-inner">
+            <img src="https://media.istockphoto.com/id/838386748/pt/foto/bartender-decorated-espresso-cocktail-drink-white-foam-coffee-bean.jpg?s=1024x1024&w=is&k=20&c=txvvfTxptQx1vNxmH63aaiWf6W1Xky2z7zp3h6j8DzI=" alt="Imagem 1" class="slide">
+            <img src="https://media.istockphoto.com/id/95247854/pt/foto/ch%C3%A1vena-de-caf%C3%A9.jpg?s=1024x1024&w=is&k=20&c=u0KzbiWxPRYaDNkteI2s3CVLjqi7C1w-LN8nuH8dTFE=" alt="Imagem 2" class="slide">
+            <img src="https://media.istockphoto.com/id/927104472/pt/foto/black-russian-cocktail.jpg?s=1024x1024&w=is&k=20&c=BKu9IgFI8EWnkL30r3baIqc_Ou_9nyeIMPG_FI134iQ=" alt="Imagem 3" class="slide">
+            <!-- Adicione mais imagens conforme necessário -->
+        </div>
+    </div>
+       <!-- JavaScript -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+    const slides = document.querySelectorAll('.slide');
+    const carouselInner = document.querySelector('.carousel-inner');
+
+    let currentSlide = 0;
+
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        updateCarousel();
+    }
+
+    function updateCarousel() {
+        const offset = -currentSlide * slides[0].clientWidth;
+        carouselInner.style.transform = `translateX(${offset}px)`;
+    }
+
+    setInterval(nextSlide, 3000);
+});
+    </script>
+    
+    <!-- Sobre a cafeteria -->
+    <section id="sobre">
+        <h2>Sobre a Coffee Shop Tia Rosa</h2>
+        <p>Cafeteria vindo de um sonho de criança de ter um lugar pra tomar e sentir o cheiro do café sendo torrado na hora. Os cafés são torrados em pequenos lotes para manter sempre o frescor. O cardápio traz os variados modos de preparo dos cafés especiais, capuccino, chás, doces e lanches.</p>
+    </section>
+
+    <!-- Menu -->
+    <section id="menu">
+        <h2>Menu</h2>
+        <ul>
+            <li>
+                <h3>Expresso</h3>
+                <img src="https://i.pinimg.com/236x/a8/02/a3/a802a3347368a5155c3ba3388bc77ce1.jpg" alt="Produto 1">
+                <p>Café preto torrado na hora</p>
+                <button>Adicionar ao Carrinho</button>
+            </li>
+            <li>
+                <h3>Machiatto</h3>
+                <img src="https://i.pinimg.com/236x/9e/07/9a/9e079aa6bab849f7f42b16fa39a870f9.jpg" alt="Produto 2">
+                <p>Café com Chantilly</p>
+                <button>Adicionar ao Carrinho</button>
+            </li>
+            <li>
+                <h3>Capuccino</h3>
+                <img src="https://i.pinimg.com/236x/9b/33/8e/9b338e2e8b608b93c297581092ff1feb.jpg" alt="Produto 3">
+                <p>Café com um pouco de leite e chantilly</p>
+                <button>Adicionar ao Carrinho</button>
+            </li>
+             <li>
+                <h3>Latte</h3>
+                <img src="https://i.pinimg.com/236x/b8/4c/9d/b84c9db0910aa8247d79b69a4ecd1438.jpg" alt="Produto 4">
+                <p>Café com muito leite e Chantilly</p>
+                <button>Adicionar ao Carrinho</button>
+            </li> 
+            <li>
+                <h3>Croassaint</h3>
+                <img src="https://i.pinimg.com/236x/b3/f9/8a/b3f98ae0b6710dcc419a8b3e476b4f3d.jpg" alt="Produto 5">
+                <p>Croassaint de doce e de Sal</p>
+                <button>Adicionar ao Carrinho</button>
+            </li>
+             <li>
+                <h3>Sanduíche Natural</h3>
+                <img src="https://i.pinimg.com/564x/55/c7/ba/55c7ba2db34212c131d1f09ac2558ec4.jpg" alt="Produto 1">
+                <p>Sanduiche feito com pão de forma, salada, e cheio de sua preferência</p>
+                <button>Adicionar ao Carrinho</button>
+            </li>
+        </ul>
+    </section>
+
+    <!-- Carrinho -->
+    <section id="carrinho">
+        <h2>Carrinho</h2>
+        <ul>
+            <!-- Lista de itens no carrinho -->
+        </ul>
+        <button>Finalizar Pedido</button>
+    </section>
+
+
+    <!-- Rodapé -->
+    <footer>
+        <p>&copy; 2024 Coffee Shop Tia Rosa. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>
